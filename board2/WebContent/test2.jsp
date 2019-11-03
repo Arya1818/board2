@@ -7,15 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-String msg = (String)request.getAttribute("msg");
-String url = (String)request.getAttribute("url"); // /views/index
-%>
-
-<script>
-	alert('<%=msg%>');
-	location.href='<%=url%>';
-</script>
-
+내가 나오면 컴파일 잘된거임 ㅎ
 </body>
 </html>

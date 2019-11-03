@@ -17,20 +17,18 @@ public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserService us = new UserServiceImpl(); // 메모리생성되고 계속 쓰려고 위로 빼줌!
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		String uiId = request.getParameter("uiId");
 		String uiPwd = request.getParameter("uiPwd");
 		String uiName = request.getParameter("uiName");
-		String uri = request.getRequestURI();
-		String cmd = uri.substring(7);
+		String uri = request.getRequestURI(); // 요청받은 uri는 /users/login
+		String cmd = uri.substring(7); // cmd는 login 
 		String path = "/views/msg";
-		UserServiceImpl us = new UserServiceImpl();
+		UserServiceImpl us = new UserServiceImpl(); 
 		
 		if ("login".equals(cmd)) {
 			Map <String,String> user = us.doLogin(uiId, uiPwd);
@@ -46,16 +44,13 @@ public class UserController extends HttpServlet {
 			}
 
 		} else if ("signup".equals(cmd)) {
-			Map<String,Object> rMap = us.doSignup(uiName, uiId, uiPwd);
-			String url = "";
-			String msg = "";
-			
+			Map<String,String> rMap = us.doSignup(uiName, uiId, uiPwd);
 			if(rMap!=null) {
-				url = (String)rMap.get("url");
-				msg = (String)rMap.get("msg");
+				request.setAttribute("msg", "회원가입완료");
+				request.setAttribute("url", "/views/index");
 			}else {
-				url = "/views/user/signup";
-				msg = "회원가입 오류.";
+				request.setAttribute("msg", "회원가입실패");
+				request.setAttribute("url", "/views/user/signup");
 			}
 
 		} else if ("logout".equals(cmd)) {

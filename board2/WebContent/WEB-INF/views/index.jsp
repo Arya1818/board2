@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-삭제하고 다시 만드는 게시판<br>
+<h2>!!!게시판 첫 화면!!!</h2><br>
 
 <%
 if(user==null){
@@ -18,6 +18,7 @@ if(user==null){
 
 <a href="/views/user/login">로그인</a>
 <a href="/views/user/signup">회원가입</a>
+<a href="/views/user/test2">이거 나와야함!</a>
 
 <%
 }else{

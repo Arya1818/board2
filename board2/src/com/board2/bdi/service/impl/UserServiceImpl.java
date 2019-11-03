@@ -13,8 +13,8 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public Map<String,String> doLogin(String uiId, String uiPwd) {
-		Map<String,String> user = new HashMap<>();
-		user.put("uiId", uiId);
+		Map<String,String> user = new HashMap<>(); //user는 의미부여x 변수명임.
+		user.put("uiId", uiId); //UserController에서 보낸걸 맵 안에저장
 		user.put("uiPwd", uiPwd);
 		return udao.selectUser(user); //있을 경우 map을 리턴, 없으면 null을 리턴
 		
@@ -23,13 +23,13 @@ public class UserServiceImpl implements UserService {
 		
 	
 	}
-	public Map<String,Object> doSignup(String uiName, String uiId, String uiPwd){
-		 Map<String,Object> rMap = new HashMap<String,Object>();
-		 rMap.put("msg", uiName + "님 회원가입 성공!");
-		 rMap.put("url","/views/user/signup");
+	public Map<String,String> doSignup(String uiName, String uiId, String uiPwd){
+		 Map<String,String> rMap = new HashMap<>();
 		 
-		 return rMap;
-
+		 rMap.put("uiName",uiName);
+		 rMap.put("uiId",uiId);
+		 rMap.put("uiPwd",uiPwd);
+		 return udao.doSignup(rMap);
 	}
 }
 
