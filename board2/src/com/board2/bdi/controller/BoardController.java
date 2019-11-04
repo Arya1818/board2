@@ -25,9 +25,10 @@ public class BoardController extends HttpServlet {
 		String cmd = uri.substring(7);
 		String path = "/views/board/list";
 		
-		Map<String,String> bMap = new HashMap<>();
+		Map<String,String> board = new HashMap<>();
 		if ("list".equals(cmd)) {
-			List<Map<String,String>> list = bs.getBoardList(bMap);
+			List<Map<String,String>> list = bs.getBoardList(board);
+			
 			request.setAttribute("list",list);
 		}
 		

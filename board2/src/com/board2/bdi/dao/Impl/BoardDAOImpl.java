@@ -111,10 +111,14 @@ public class BoardDAOImpl implements BoardDAO {
 			b.put("cretim", rs.getString("cretim"));
 			list.add(b);
 			}
-			return list;
 			
+			return list;
+		}catch (NullPointerException e) {
+			System.out.println("a");
+			e.printStackTrace();
+		
 		} catch (SQLException e) {
-
+			
 			e.printStackTrace();
 		}
 

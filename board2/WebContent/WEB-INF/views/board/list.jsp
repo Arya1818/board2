@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/header.jspf" %> 
@@ -20,7 +22,7 @@ List<Map<String,String>> list = (List<Map<String,String>>)request.getAttribute("
 	<th>작성시간</th>
 </tr>
 <%
-for (Map<String,String> board:list) { 
+for(Map<String,String> board:list) { 
 %>
 <tr>
 	<td><%=board.get("biNum") %></td> 
