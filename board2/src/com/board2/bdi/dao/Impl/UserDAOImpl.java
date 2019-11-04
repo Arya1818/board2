@@ -40,8 +40,8 @@ public class UserDAOImpl implements UserDAO {
 			rs = ps.executeQuery();
 			
 			if(rs.next()) { //return true or false, // 아이디, 비번이 올바르게 동작했을 때 true
-//				user.put("uiNum",rs.getString("ui_num")); 					//true 이니 uiNum과 uiName을 가져옴?왜가져오지?
-//				user.put("uiName",rs.getString("ui_name"));
+				user.put("uiNum",rs.getString("ui_num")); 					//true 이니 uiNum과 uiName을 가져옴?왜가져오지? board할때 쓰려고..
+				user.put("uiName",rs.getString("ui_name"));
 				System.out.println(user);
 				return user;
 			}
@@ -50,10 +50,10 @@ public class UserDAOImpl implements UserDAO {
 		}finally {
 			try {
 				if(rs!=null) {
-					con.close();
+					rs.close();
 				}
 				if(ps!=null) {
-					con.close();
+					ps.close();
 				} 
 				if(con!=null) {
 					con.close();
