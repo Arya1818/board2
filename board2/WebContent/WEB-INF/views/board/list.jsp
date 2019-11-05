@@ -27,7 +27,7 @@ for(Map<String,String> board:list) {
 <tr>
 	<td><%=board.get("biNum") %></td> 
 	<td><%=board.get("biTitle") %></td>
-	<td><%=board.get("uiId") %></td>
+	<td><%=board.get("uiNum") %></td>
 	<td><%=board.get("credat") %></td>
 	<td><%=board.get("cretim") %></td>
 </tr>

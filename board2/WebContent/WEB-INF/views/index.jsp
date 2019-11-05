@@ -23,7 +23,7 @@ if(user==null){
 <%
 }else{
 %>
-<a href="/views/board/list">게시판가기</a>
+<a href="/board/list">게시판가기</a>
 
 <%
 }

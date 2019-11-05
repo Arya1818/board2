@@ -84,7 +84,10 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
+	
 	public List<Map<String, String>> getBoardList(Map<String, String> board) {
+		
+		
 		try {
 			Class.forName(DRIVER_NAME);
 		} catch (ClassNotFoundException e) {
@@ -103,16 +106,17 @@ public class BoardDAOImpl implements BoardDAO {
 			Map<String,String> b = new HashMap<>();
 			b.put("biNum", rs.getString("bi_num"));
 			b.put("biTitle", rs.getString("bi_title"));
-			b.put("biContent", rs.getString("bi_content"));
+	//		b.put("biContent", rs.getString("bi_content"));
 			b.put("uiNum", rs.getString("ui_num"));
-			b.put("uiName", rs.getString("ui_name"));
-			b.put("uiId", rs.getString("ui_Id"));
+	//		b.put("uiName", rs.getString("ui_name"));
+	//		b.put("uiId", rs.getString("ui_Id"));
 			b.put("credat", rs.getString("credat"));
 			b.put("cretim", rs.getString("cretim"));
 			list.add(b);
 			}
 			
 			return list;
+			
 		}catch (NullPointerException e) {
 			System.out.println("a");
 			e.printStackTrace();
