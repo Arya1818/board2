@@ -24,6 +24,8 @@ if(user==null){
 }else{
 %>
 <a href="/board/list">게시판가기</a>
+<a href="/users/list">유저목록보기</a>
+<a href="/users/logout">로그아웃</a>
 
 <%
 }

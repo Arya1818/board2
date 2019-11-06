@@ -22,7 +22,6 @@ public class BoardDAOImpl implements BoardDAO {
 	private PreparedStatement ps;
 	private ResultSet rs;
 	int result;
-	
 
 //	public static void main(String[] args) { //다오,서비스 문제없는거 확인할때
 //		BoardDAO bdao = new BoardDAOImpl();
@@ -52,19 +51,10 @@ public class BoardDAOImpl implements BoardDAO {
 			ps.setString(2, board.get("biContent"));
 			ps.setString(3, board.get("uiNum"));
 
-//			if(board!=null) {
-//				System.out.println(sql);
-
 			return ps.executeUpdate();
 
-//			}
-
-//		}catch(NullPointerException e ) {
-//			System.out.println(result);
-//			System.out.println(sql);
-
 		} catch (SQLException e) {
-			// System.out.println("cc");
+			
 			e.printStackTrace();
 		} finally {
 			try {
@@ -84,10 +74,8 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	
 	public List<Map<String, String>> getBoardList(Map<String, String> board) {
-		
-		
+
 		try {
 			Class.forName(DRIVER_NAME);
 		} catch (ClassNotFoundException e) {
@@ -96,36 +84,144 @@ public class BoardDAOImpl implements BoardDAO {
 		}
 		try {
 			con = DriverManager.getConnection(URL, ID, PWD);
-			
+
 			String sql = "select * from board_info";
-			
+
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
-			List<Map<String,String>> list = new ArrayList<>();
-			while(rs.next()) {
-			Map<String,String> b = new HashMap<>();
-			b.put("biNum", rs.getString("bi_num"));
-			b.put("biTitle", rs.getString("bi_title"));
-	//		b.put("biContent", rs.getString("bi_content"));
-			b.put("uiNum", rs.getString("ui_num"));
-	//		b.put("uiName", rs.getString("ui_name"));
-	//		b.put("uiId", rs.getString("ui_Id"));
-			b.put("credat", rs.getString("credat"));
-			b.put("cretim", rs.getString("cretim"));
-			list.add(b);
+			List<Map<String, String>> list = new ArrayList<>();
+			while (rs.next()) {
+				Map<String, String> b = new HashMap<>();
+				b.put("biNum", rs.getString("bi_num"));
+				b.put("biTitle", rs.getString("bi_title"));
+				// b.put("biContent", rs.getString("bi_content"));
+				b.put("uiNum", rs.getString("ui_num"));
+				// b.put("uiName", rs.getString("ui_name"));
+				// b.put("uiId", rs.getString("ui_Id"));
+				b.put("credat", rs.getString("credat"));
+				b.put("cretim", rs.getString("cretim"));
+				list.add(b);
 			}
-			
+
 			return list;
-			
-		}catch (NullPointerException e) {
+
+		} catch (NullPointerException e) {
 			System.out.println("a");
 			e.printStackTrace();
-		
+
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 
 		return null;
 	}
+
+	@Override
+	public Map<String, String> selectBoard(Map<String, String> board) {
+
+		try {
+			Class.forName(DRIVER_NAME);
+		} catch (ClassNotFoundException e) {
+
+			e.printStackTrace();
+		}
+		try {
+			con = DriverManager.getConnection(URL, ID, PWD);
+
+			String sql = "select * from board_info bi, user_info ui ";
+			sql += " where bi.ui_num=ui.ui_num";
+			sql += " and bi_num=?";
+
+			ps = con.prepareStatement(sql);
+			ps.setString(1, board.get("biNum"));
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Map<String, String> b = new HashMap<>();
+				b.put("biNum", rs.getString("bi_num"));
+				b.put("biTitle", rs.getString("bi_title"));
+				b.put("biContent", rs.getString("bi_content"));
+				b.put("uiNum", rs.getString("ui_num"));
+				b.put("uiName", rs.getString("ui_name"));
+				b.put("uiId", rs.getString("ui_Id"));
+				b.put("credat", rs.getString("credat"));
+				b.put("cretim", rs.getString("cretim"));
+				return b;
+			}
+
+		} catch (NullPointerException e) {
+			System.out.println("a");
+			e.printStackTrace();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
+	
+	public int updateBoard(Map<String, String> board) {
+		try {
+			con = DriverManager.getConnection(URL, ID, PWD);
+			String sql = "update board_info"
+					+ " set bi_title=?"
+					+ ", bi_content=?"
+					+ " where bi_num=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, board.get("biTitle"));
+			ps.setString(2, board.get("biContent"));
+			ps.setString(3, board.get("biNum"));
+			return ps.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) {
+					rs.close();
+				}
+				if(ps!=null) {
+					ps.close();
+				}
+				if(con!=null) {
+					con.close();
+				}
+			}catch(SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
+		return 0;
+	}
+
+	@Override
+	public int deleteBoard(Map<String, String> board) {
+	
+		try {
+			con = DriverManager.getConnection(URL, ID, PWD);
+			String sql = "delete from board_info where bi_num=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, board.get("biNum"));
+			return ps.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) {
+					rs.close();
+				}
+				if(ps!=null) {
+					ps.close();
+				}
+				if(con!=null) {
+					con.close();
+				}
+			}catch(SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
+		return 0;
+	}
+
 }

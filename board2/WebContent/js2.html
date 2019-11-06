@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Javascript</title>
+</head>
+<body>
+ 	<div id="div1"></div>
+	<button onclick="changeDiv()">수정</button> 
+	<script>
+ 		function changeDiv(){
+			var divObj = document.getElementById("div1");
+			divObj.innerHTML="난 수정 됐음!"
+		}
+		
+//		changeDiv(); //내가만든function, window에 귀속됨,  
+
+
+/* 		var arr = [];
+		for(var i = 1;i<=100;i++){
+			if(i%2==0){
+				arr.push(0);
+			}else{
+				arr.push(i);
+			}
+		} 
+		console.log(arr);*/
+		
+ /* 		var str ='';
+		for(var i=1;i<=9;i++){
+			str += 1 + 'x' + i + '=' + (i*9) + '<br>';
+			
+		}
+		document.getElementById("div1").innerHTML=str; */
+		 
+		
+ 		var str ='';
+		for(var i=1;i<=9;i++){
+			for(var j=1; i<=9; j++){
+				str += j + 'x' + i + '=' + (i*j) + '<br>';
+			}
+			document.getElementById("div1").innerHTML=str;
+		} 
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+

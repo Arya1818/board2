@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.board2.bdi.dao.UserDAO;
@@ -15,13 +17,97 @@ public class UserDAOImpl implements UserDAO {
 	private static final String ID = "bdi";
 	private static final String PWD = "12345678";
 	private static final String DRIVER_NAME = "oracle.jdbc.driver.OracleDriver";
-	
-	
 	private Connection con;
 	private PreparedStatement ps;
 	private ResultSet rs;
 	
-	
+	//유저리스트
+	public List<Map<String,String>> selectUserList(Map<String,String> user){
+		List<Map<String,String>> userList = new ArrayList<>();
+		try {
+			con = DriverManager.getConnection(URL, ID, PWD);
+			String sql = "select * from user_info where 1=1 ";
+			if(user.get("uiId")!=null) {
+				sql += " and ui_id=?";
+			}
+			if(user.get("uiNum")!=null) {
+				sql += " and ui_num=?";
+			}
+			if(user.get("uiName")!=null) {
+				sql += " and ui_name=?";
+			}
+			
+			ps = con.prepareStatement(sql);
+			
+			//한개만 null 아닐경우
+			if(user.get("uiId")!=null&&user.get("uiNum")==null&&user.get("uiName")==null) {
+				ps.setString(1, user.get("uiId"));
+			}
+			else if(user.get("uiId")==null&&user.get("uiNum")!=null&&user.get("uiName")==null) {
+				ps.setString(1, user.get("uiNum"));
+			}
+			else if(user.get("uiId")==null&&user.get("uiNum")==null&&user.get("uiName")!=null) {
+				ps.setString(1, user.get("uiName"));
+			}
+			//두개가 null 아닐경우
+			else if(user.get("uiId")!=null&&user.get("uiNum")!=null&&user.get("uiName")==null) {
+				ps.setString(1, user.get("uiId"));
+				ps.setString(2, user.get("uiNum"));
+			}
+			else if(user.get("uiId")==null&&user.get("uiNum")!=null&&user.get("uiName")!=null) {
+				ps.setString(1, user.get("uiNum"));
+				ps.setString(2, user.get("uiName"));
+			}
+			else if(user.get("uiId")!=null&&user.get("uiNum")==null&&user.get("uiName")!=null) {
+				ps.setString(1, user.get("uiId"));
+				ps.setString(2, user.get("uiName"));
+			}
+			//세개가 null 아닐경우
+			else if(user.get("uiId")!=null&&user.get("uiNum")!=null&&user.get("uiName")!=null){
+				ps.setString(1, user.get("uiId"));
+				ps.setString(2, user.get("uiNum"));
+				ps.setString(3, user.get("uiName"));
+			}
+			
+		
+			rs = ps.executeQuery();
+			while(rs.next()) { 
+				Map<String,String> u = new HashMap<>();
+				u.put("uiNum", rs.getString("ui_num"));
+				u.put("uiId", rs.getString("ui_id"));
+				u.put("uiName", rs.getString("ui_name"));
+//				u.put("cretim", rs.getString("cretim"));
+//				u.put("moddat", rs.getString("moddat"));
+//				u.put("modtim", rs.getString("modtim"));
+//				u.put("active", rs.getString("active"));
+//				u.put("credat", rs.getString("credat"));
+				userList.add(u);
+				
+			}
+			return userList;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {
+					rs.close();
+				}
+				if(ps!=null) {
+					ps.close();
+				}
+				if(con!=null) {
+					con.close();
+				}
+			}catch(SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
+		return null;
+		}
+		
+	//로그인
 	public Map<String,String> selectUser(Map<String,String> user){
 		try {
 			Class.forName(DRIVER_NAME);
@@ -65,6 +151,7 @@ public class UserDAOImpl implements UserDAO {
 		return null;
 	}
 	
+	//회원가입
 	public Map<String,String> doSignup(Map<String,String> rMap){
 		try {
 			Class.forName(DRIVER_NAME);
