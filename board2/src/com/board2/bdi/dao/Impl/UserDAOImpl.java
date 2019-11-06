@@ -91,10 +91,10 @@ public class UserDAOImpl implements UserDAO {
 		}finally {
 			try {
 				if(rs!=null) {
-					con.close();
+					rs.close();
 				}
 				if(ps!=null) {
-					con.close();
+					ps.close();
 				} 
 				if(con!=null) {
 					con.close();

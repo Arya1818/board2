@@ -21,7 +21,7 @@ public class BoardServiceImpl implements BoardService {
 			board.put("msg", "등록완료");
 			board.put("url", "/board/list");
 		}else {
-			board.put("msg", "잘하자.");
+			board.put("msg", "오류.");
 			board.put("url", "/views/board/insert");
 		}
 		return board;

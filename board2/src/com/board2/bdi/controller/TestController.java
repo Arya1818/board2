@@ -28,6 +28,7 @@ public class TestController extends HttpServlet {
 			Map<String,String> tt = new HashMap<>();
 			tt.put("name", "이름" + i);
 			tt.put("age", i + "");
+			
 			list.add(tt);
 			
 		}

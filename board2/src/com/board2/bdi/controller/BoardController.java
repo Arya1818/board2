@@ -21,6 +21,7 @@ public class BoardController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		String uri = request.getRequestURI();
 		String cmd = uri.substring(7);
 		String path = "/views/board/list";

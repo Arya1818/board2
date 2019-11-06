@@ -15,10 +15,10 @@
 			<th>나이</th>
 		</tr>
 		<c:forEach var="tt" items="${list}">
-			<tr>
-				<td>${tt.name}</td>
-				<td>${tt.age}</td>
-			</tr>
+		<tr>
+			<td>${tt.name}</td>
+			<td>${tt.age}</td>
+		</tr>
 		</c:forEach>
 	</table>
 </body>

@@ -12,7 +12,7 @@
 <body>
 
 <c:set var="str" value="abc"/>
-<c:if test="${str eq 'abc'}">
+<c:if test="${str eq 'abc'}"> 
 	str은 abc네
 	</c:if>
 <c:if test="${str ne 'abc'}">
