@@ -10,5 +10,10 @@ if(session.getAttribute("user")!=null){
 %>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<<<<<<< HEAD
 
 
+=======
+ <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+ 
+>>>>>>> branch 'master' of https://github.com/Arya1818/board2.git

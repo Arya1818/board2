@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Javascript</title>
+</head>
+<body>
+	<div id="div1"></div>
+	<button onclick="changeDiv()">수정</button> 
+	<script>
+ 		function changeDiv(){
+			var divObj = document.getElementById("div1");
+			divObj.innerHTML="난 수정 됐음!"
+		}
+		
+		changeDiv(); //내가만든function, window에 귀속됨,  
+
+//자바스크립트의 모든 변수는 동적데이터타입의 성격을 지닌다, String,num,null,undified,function 
+//jsp와 상관없음
+//		var test ='abc'; //데이터타입 String
+//		test = changeDiv; // 데이터타입 function으로 바뀜
+//		test(); //그래서 이게 가능 
+
+/*  	var a = 1;
+		var str = '1'; //String으로 간주 (js엔 char타입이 없기때문)
+		alert(a==str); //값이 같은지 비교, true
+		alert(a===str); //값과 데이터타입 둘다 비교, false
+		alert(a!=str); //값이 다른지 비교, false
+		alert(a!==str); //값,데이터타입이 다른지 비교, true  */
+		
+		var arr = [1,2,3]; //length:3 방번호1부터시작
+/* 		for(var=0;i<arr.length;i++){
+			alert(arr[i]);
+		} */
+		arr.push(4);
+		console.log(arr); //f5 -> f12
+//		console.log(arr.indexOf(2)); //2가 위치한 index
+//		console.log(arr.indexOf(5)); //-1나옴
+		
+		arr.splice(0,1);
+		console.log(arr);
+	</script>
+</body>
+</html>
