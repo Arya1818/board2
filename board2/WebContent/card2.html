@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="rDiv1"></div>
+	<div id="rDiv2"></div>
+
+
+	<script>
+		var arr1 = [];
+		var arr2 = [];
+
+		for (var i = 1; i <= 10; i++) {
+			var rNum = Math.random();
+			rNum = Math.floor(rNum * 10) + 1;
+			if (arr1.indexOf(rNum) == -1) {
+				arr1.push(rNum);
+			} else {
+				i--;
+			}
+		}
+
+		for (var i = 1; i <= 10; i++) {
+			var rNum = Math.random();
+			rNum = Math.floor(rNum * 10) + 1;
+			if (arr2.indexOf(rNum) == -1) {
+				arr2.push(rNum);
+			} else {
+				i--;
+			}
+		}
+		var html1 = '<table border="1"><tr>';
+		var html2 = '<table border="1"><tr>';
+
+		for (var i = 1; i < arr1.length; i++) {
+			html1 += '<td onclick="checkCard1(this,' + arr1[i] + ')"># </td>';
+			html2 += '<td onclick="checkCard2(this,' + arr2[i] + ')"># </td>';
+		}
+		html1 += '</tr></table>';
+		html2 += '</tr></table>';
+
+		document.getElementById('rDiv1').innerHTML = html1;
+		document.getElementById('rDiv2').innerHTML = html2;
+
+ 
+		function checkCard2(tdObj, num2) {
+			tdObj.innerHTML = num2;
+
+		}
+		function checkCard1(tdObj, num1) {
+			if (num1 == checkCard2().num2) {
+				tdObj.innerHTML = num1;
+			}else{
+				document.getElementById('rDiv1').innerHTML = html1;
+				document.getElementById('rDiv2').innerHTML = html2;
+			}
+
+		}
+	</script>
+
+</body>
+</html>

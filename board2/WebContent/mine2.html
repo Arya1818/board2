@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<div id="rDiv"></div>
+	<button onclick="startGame()">게임시작</button>
+
+	<script>
+		var rDiv = document.getElementById('rDiv');
+		var rNum;
+		
+		function startGame() {
+			rNum = Math.floor(Math.random()*16)+1;
+			var html = '<table border="1">';
+			var n = 1;
+			for (var i = 1; i <= 4; i++) {
+				html += '<tr>';
+				for (var j = 1; j <= 4; j++) {
+					html += '<td><button onclick="clickBtn(this,'+(n++)+')">난 지뢰아님</button></td>'; //clickBtn()안에 인자값 안넣어도 동작함.
+				}
+				html += '</tr>';
+			}
+			html += '</table>'; //여기까진 String
+			rDiv.innerHTML = html; //여기부터 브라우저 메모리에 올라감
+		}
+		
+		function clickBtn(btnObj,btnNum){ //파라미터 데이터타입과 갯수가 달라도 동작함! 오버로딩 없음, 마지막에 선언한 함수가 짱! (자바와다름)
+			if(btnNum==rNum){
+				alert('지뢰당첨!');
+			}else{
+				btnObj.parentNode.innerHTML='통과~';//btnObj는 <button onclick="clickBtn(this,'+(n++)+')">난 지뢰아님</button>
+													//이거의 parentNode는 <td>~</td>까지임. 이것의 innerHTML에 '통과~' 를 넣어라!!
+			}
+			
+		} //정적자원(고정자원임) - 테이블을 만들기 전과 후 소스가 같음!
+	</script>
+</body>
+</html>
