@@ -1,4 +1,4 @@
-<%@page import="java.util.ArrayList"%>
+
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -19,12 +19,12 @@
 			<th>작성일자</th>
 			<th>작성시간</th>
 		</tr>
-		
+
 		<c:if test="${empty list}">
 			<tr>
 				<td colspan="5">게시물이 없습니다.</td>
 			</tr>
-		</c:if>	
+		</c:if>
 		<c:forEach var="board" items="${list}">
 			<tr>
 				<td>${board.biNum}</td>
@@ -34,9 +34,9 @@
 				<td>${board.cretim}</td>
 			</tr>
 		</c:forEach>
-		
-		</table>	
-		<a href="/views/board/insert">글쓰기</a>
-	
+
+	</table>
+	<a href="/views/board/insert">글쓰기</a>
+
 </body>
 </html>

@@ -57,8 +57,8 @@ public class BoardController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession hs = request.getSession();
 		request.setCharacterEncoding("utf-8");
+		HttpSession hs = request.getSession();
 		Map<String, String> user = (Map<String, String>) hs.getAttribute("user");
 
 		String biTitle = request.getParameter("biTitle");
