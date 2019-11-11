@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	url : <input type="text" id="url">
+	<button onclick="doSend()">SEND</button>
+	<div id ="rDiv"></div>
+
+	<script>
+		const xhr = new XMLHttpRequest(); //브라우저가 메모리를 로딩하고 xhr에게 넘겨줌(인스턴스화)//private는 접근불가. 접근가능한 애들은 xhr을 쓸 수 있다
+		var rDiv = document.getElementById('rDiv');
+		function doSend() {
+			var url = document.getElementById('url').value;
+
+			xhr.open('GET', url); //open은 function, get방식 호출, url로 접근
+
+			xhr.onreadystatechange = function(e) { //readystate:바뀔때마다  바뀔때마다 {}안에있는걸 실행 
+
+				if (xhr.readyState == 4) { //xhr은 open하기 전에0 오픈하면1 send하면(get방식으로url호출)request를 받은시점2 서버가 일을함3 response로응답4 
+					if (xhr.status == 200) { //200:성공 했다면
+						//alert(xhr.responseText); //얘가 가지고 있는 response를 출력해라.
+						rDiv.innerHTML = xhr.responseText;
+
+					} else { //강제로 에러내보기
+						rDiv.innerHTML = xhr.responseText;
+					}
+				}
+			}
+			xhr.send();//2
+		}
+	</script>
+</body>
+</html>
+
+
+<!--
+ const는 상수, 값을 바꾸지못함 
+new를 붙인 function
+function test(){
+	this.a=3;
+}
+var t = test(); //return이없으니 void 그러나
+ var t = new test(); 하면 alert(t.a); 가능해서 멤버변수에 접근가능.
+ 
+ //이벤트는 소문자가 표준
+-->

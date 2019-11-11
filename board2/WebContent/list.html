@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+window.onload = function(){ //로딩될 때 첨부터끝까지 다 읽음
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET','/list'); //listContolloler 만들고 web.xml 연결 
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState==4){
+			if(xhr.status==200){
+				document.getElementById('rDiv').innerHTML = xhr.responseText;
+			}
+		}
+	}
+	xhr.send();
+}
+</script>
+<div id="rDiv"></div> <!-- 여기있어도 window.onload때문에 처음에 읽힘 -->
+</body>
+</html>
