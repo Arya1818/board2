@@ -25,7 +25,15 @@
 			var num2 = document.getElementById('num2').value;
 			
 			var op = document.getElementById('op').value;
-			var url = '/calc?num1=' + num1 + '&num2=' + num2 +'&op='+encodeURIComponent(op);
+			
+			var json = {
+					num1:num1,
+					num2:num2,
+					op:op
+			}
+			var jsonStr = JSON.stringify(json); //json을  {"num1":"5","num2":"5","op":"+"}이렇게  String화 시킴
+			
+			var url = '/calc?json=' + encodeURIComponent(jsonStr);
 			
 			xhr.open('GET',url);
 			xhr.onreadystatechange = function(e) {

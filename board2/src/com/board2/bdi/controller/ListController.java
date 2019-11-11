@@ -1,14 +1,19 @@
 package com.board2.bdi.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 
 @WebServlet("/Listcontroller")
 public class ListController extends HttpServlet {
@@ -17,19 +22,19 @@ public class ListController extends HttpServlet {
     
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<String> strList = new ArrayList<>();
-		strList.add("1");
-		strList.add("배고파");
-		strList.add("밥");
-		strList.add("줘");
-		strList.add("런치~~");
+		List<Map<String,String>> hList = new ArrayList<>();
+		Map<String,String> h = new HashMap<>();
+		
+		h.put("name", "홍길동");
+		h.put("age", "25");
+		hList.add(h);
+		hList.add(h);
+		hList.add(h);
 		response.setContentType("text/html;charset=utf-8");
-		String html = "";
-		for(String str:strList) {
-			html += str + "<br>"; 
-		}
-		response.getWriter().print(html); 
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		PrintWriter pw = response.getWriter();
+		Gson gson = new Gson();
+		pw.print(gson.toJson(hList));
+		
 	}
 
 	
@@ -37,5 +42,13 @@ public class ListController extends HttpServlet {
 		
 		doGet(request, response);
 	}
-
+	
+	public static void main(String[] args) {
+		Map<String,String> map = new HashMap<>();
+		map.put("name", "홍길동");
+		map.put("age", "33");
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(map);
+//		System.out.println(jsonStr);
+	}
 }

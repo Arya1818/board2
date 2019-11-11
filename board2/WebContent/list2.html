@@ -37,38 +37,30 @@ hArr.push(h);
 hArr.push(h);
 console.log(hArr);
 
-var str = JSON.stringify(hArr); //객체->제이슨형태 string 바꿔준것
-var hArr2 = JSON.parse(str); //제이슨형태의 string -->객체로 바꿔준것
-//document.write(hArr);
-//document.write(hArr2);
-
-
-
 window.onload = function(){ //로딩될 때 첨부터끝까지 다 읽음
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET','/list'); //listController 만들고 web.xml 연결 
+	xhr.open('GET','/list'); //listContolloler 만들고 web.xml 연결 
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState==4){
 			if(xhr.status==200){
-				var list = JSON.parse(xhr.responseText);
-				var html = '<table border="1">';
-				html += '<tr>';
-				html += '<th>이름</th>';
-				html += '<th>나이</th>';
-				html += '</tr>';
-				for(var i=0; i<list.length; i++){
-					html += '<tr>';
-					html += '<td>' + list[i].name +'</td>';
-					html += '<td>' + list[i].age + '</td>';
-					html += '</tr>';
-				}
-				html += '</table>';
-				document.getElementById('rDiv').innerHTML = html;
+				document.getElementById('rDiv').innerHTML = xhr.responseText;
 			}
 		}
 	}
-	xhr.send();
-
+//	xhr.send();
+	var html = '<table border="1">';
+	html += '<tr>';
+	html += '<th>이름</th><th>나이</th>';
+	html += '</tr>';
+	
+	for(var i=0; i<hArr.length; i++){
+		var human = hArr[i];
+		html += '<tr>';
+		html += '<td>' + human.name + '</td><td>' + human.age + '</td>';
+		html += '</tr>';
+	}
+	html += '</table>';
+	document.getElementById('rDiv').innerHTML = html;
 }
 </script>
 <div id="rDiv"></div> <!-- 여기있어도 window.onload때문에 처음에 읽힘 -->
