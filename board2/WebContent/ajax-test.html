@@ -17,7 +17,7 @@
 
 			xhr.open('GET', url); //open은 function, get방식 호출, url로 접근
 
-			xhr.onreadystatechange = function(e) { //readystate:바뀔때마다  바뀔때마다 {}안에있는걸 실행 
+			xhr.onreadystatechange = function(e) { //서버와의 통신이 끝났을 때 호출되는 이벤트. readystate:바뀔때마다  바뀔때마다 {}안에있는걸 실행 
 
 				if (xhr.readyState == 4) { //xhr은 open하기 전에0 오픈하면1 send하면(get방식으로url호출)request를 받은시점2 서버가일을함3 response로응답4 
 					if (xhr.status == 200) { //200:성공 했다면
